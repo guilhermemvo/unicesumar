@@ -4,7 +4,7 @@ class AlunoModel extends BaseModel
 {
 
     const CREATE_QUERY = 'INSERT INTO aluno (NM_ALUNO,DT_NASCIMENTO) VALUES (:name,:nascimento)';
-    const LIST_ALL_QUERY = 'SELECT ID_ALUNO as id, NM_ALUNO as nome, DT_NASCIMENTO as nascimento FROM ALUNO';
+    const LIST_ALL_QUERY = 'SELECT ID_ALUNO as id, NM_ALUNO as nome, DT_NASCIMENTO as nascimento FROM ALUNO ORDER BY NM_ALUNO ASC';
     const SELECT_QUERY = 'SELECT NM_ALUNO as nome, DT_NASCIMENTO as nascimento FROM ALUNO WHERE ID_ALUNO = :id';
     const UPDATE_QUERY = 'UPDATE aluno SET NM_ALUNO=:name,DT_NASCIMENTO=:nascimento WHERE ID_ALUNO=:id';
     const DELETE_QUERY = 'DELETE FROM aluno WHERE ID_ALUNO=:id';

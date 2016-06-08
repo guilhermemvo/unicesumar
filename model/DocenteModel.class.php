@@ -4,7 +4,7 @@ class DocenteModel extends BaseModel
 {
 
     const CREATE_QUERY = 'INSERT INTO docente (NM_DOCENTE,CD_MATRICULA) VALUES (:name,:matricula)';
-    const LIST_ALL_QUERY = 'SELECT ID_DOCENTE as id, NM_DOCENTE as nome, CD_MATRICULA as matricula FROM DOCENTE';
+    const LIST_ALL_QUERY = 'SELECT ID_DOCENTE as id, NM_DOCENTE as nome, CD_MATRICULA as matricula FROM DOCENTE ORDER BY NM_DOCENTE ASC';
     const SELECT_QUERY = 'SELECT NM_DOCENTE as nome, CD_MATRICULA as matricula FROM DOCENTE WHERE ID_DOCENTE = :id';
     const UPDATE_QUERY = 'UPDATE docente SET NM_DOCENTE=:name,CD_MATRICULA=:matricula WHERE ID_DOCENTE=:id';
     const DELETE_QUERY = 'DELETE FROM docente WHERE ID_DOCENTE=:id';
