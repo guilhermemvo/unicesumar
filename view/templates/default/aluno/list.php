@@ -13,10 +13,10 @@
 
         <thead>
             <tr>
-                <th>ID</th>
-                <th>NOME</th>
-                <th>DATA DE NASCIMENTO</th>
-                <th>OPÇÕES</th>
+                <th class="col-md-1">ID</th>
+                <th class="col-md-6">NOME</th>
+                <th class="col-md-3">DATA DE NASCIMENTO</th>
+                <th class="col-md-2">OPÇÕES</th>
             </tr>
         </thead>
         <tbody>

@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 class AlunoController {
 
@@ -12,11 +12,12 @@ class AlunoController {
     const EMPTY_DATA = 'Preencha todos os campos do formulário.';
     const EMPTY_LIST = 'Não há nenhum aluno, insira um novo.';
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
+    const VIEW = 'aluno/';
 
     public function create()
     {
         if (empty($_POST)) {
-            View::output('newAluno');
+            View::output(self::VIEW . 'new');
             exit();
         }
 
@@ -36,7 +37,7 @@ class AlunoController {
         } catch (Exception $exc) {
             // log $exc->getMessage();
             View::setAlert('danger', self::CREATE_ALUNOS_FAIL);
-            View::output('newAluno');
+            View::output(self::VIEW . 'new');
         }
     }
 
@@ -48,12 +49,12 @@ class AlunoController {
 
             $aluno = $alunoModel->edit($id);
             View::setParams(array('data' => $aluno));
-            View::output('editAluno');
+            View::output(self::VIEW . 'edit');
 
         } catch (Exception $exc) {
             //log $exc->getMessage()
             View::setAlert('danger', self::NO_POSSIBLE);
-            View::output('listAlunos');
+            View::output(self::VIEW . 'list');
         }
     }
 
@@ -67,12 +68,12 @@ class AlunoController {
 
             if (empty($objectList)) {
                 View::setAlert('info', self::EMPTY_LIST);
-                View::output('newAluno');
+                View::output(self::VIEW . 'new');
                 exit();
             }
 
             View::setParams(array('data' => $objectList));
-            View::output('listAlunos');
+            View::output(self::VIEW . 'list');
 
         } catch (Exception $exc) {
             // logar erro $exc->getMessage()));
@@ -132,7 +133,7 @@ class AlunoController {
         } else {
             View::setParams(array('data' => array((object)$request)));
             View::setAlert('danger', self::EMPTY_DATA);
-            View::output('newAluno');
+            View::output(self::VIEW . 'new');
             exit();
         }
     }
