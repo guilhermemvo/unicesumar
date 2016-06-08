@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 class DocenteController {
 
@@ -12,11 +12,12 @@ class DocenteController {
     const EMPTY_DATA = 'Preencha todos os campos do formulário.';
     const EMPTY_LIST = 'Não há nenhum docente, insira um novo.';
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
+    const VIEW = 'docente/';
 
     public function create()
     {
         if (empty($_POST)) {
-            View::output('newDocente');
+            View::output(self::VIEW . 'new');
             exit();
         }
 
@@ -36,7 +37,7 @@ class DocenteController {
         } catch (Exception $exc) {
             // log $exc->getMessage();
             View::setAlert('danger', self::CREATE_DOCENTES_FAIL);
-            View::output('newDocente');
+            View::output(self::VIEW . 'new');
         }
     }
 
@@ -48,12 +49,12 @@ class DocenteController {
 
             $docente = $docenteModel->edit($id);
             View::setParams(array('data' => $docente));
-            View::output('editDocente');
+            View::output(self::VIEW . 'edit');
 
         } catch (Exception $exc) {
             //log $exc->getMessage()
             View::setAlert('danger', self::NO_POSSIBLE);
-            View::output('listDocentes');
+            View::output(self::VIEW . 'list');
         }
     }
 
@@ -67,12 +68,12 @@ class DocenteController {
 
             if (empty($objectList)) {
                 View::setAlert('info', self::EMPTY_LIST);
-                View::output('newDocente');
+                View::output(self::VIEW . 'new');
                 exit();
             }
 
             View::setParams(array('data' => $objectList));
-            View::output('listDocentes');
+            View::output(self::VIEW . 'list');
 
         } catch (Exception $exc) {
             // logar erro $exc->getMessage()));
@@ -122,17 +123,17 @@ class DocenteController {
     private function isValidRequest(&$request)
     {
         $nome = filter_input(INPUT_POST, 'nome',FILTER_SANITIZE_STRING);
-        $nascimento = filter_input(INPUT_POST, 'nascimento',FILTER_SANITIZE_SPECIAL_CHARS);
+        $matricula = filter_input(INPUT_POST, 'matricula',FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (!empty($nome) && !empty($nascimento)) {
+        if (!empty($nome) && !empty($matricula)) {
             $request = array(
                 'nome' => $nome,
-                'nascimento' => $nascimento,
+                'matricula' => $matricula,
             );
         } else {
             View::setParams(array('data' => array((object)$request)));
             View::setAlert('danger', self::EMPTY_DATA);
-            View::output('newDocente');
+            View::output(self::VIEW . 'new');
             exit();
         }
     }

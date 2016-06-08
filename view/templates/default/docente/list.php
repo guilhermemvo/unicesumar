@@ -13,10 +13,10 @@
 
         <thead>
             <tr>
-                <th>ID</th>
-                <th>NOME</th>
-                <th>DATA DE NASCIMENTO</th>
-                <th>OPÇÕES</th>
+                <th class="col-md-1">ID</th>
+                <th class="col-md-6">NOME</th>
+                <th class="col-md-3">MATRICULA</th>
+                <th class="col-md-2">OPÇÕES</th>
             </tr>
         </thead>
         <tbody>
@@ -30,7 +30,7 @@
                         <tr>
                             <td> $object->id </td>
                             <td> $object->nome </td>
-                            <td>" . dateToBr($object->nascimento) . "</td>
+                            <td> $object->matricula </td>
                             <td>
                                 <div class='btn-group btn-group-sm' role='group'>
                                     <a class='btn btn-info' href='index.php?class=Docente&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>

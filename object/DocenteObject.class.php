@@ -2,7 +2,7 @@
 
 class DocenteObject {
 
-    private $id, $name, $nascimento;
+    private $id, $name, $matricula;
 
     public function __construct($request)
     {
@@ -11,7 +11,7 @@ class DocenteObject {
         }
 
         $this->setName($request['nome']);
-        $this->setNascimento(dateToEn($request['nascimento']));
+        $this->setMatricula($request['matricula']);
     }
 
     public function getId() {
@@ -30,12 +30,12 @@ class DocenteObject {
         $this->name = $name;
     }
 
-    public function getNascimento() {
-        return $this->nascimento;
+    public function getMatricula() {
+        return $this->matricula;
     }
 
-    private function setNascimento($nascimento) {
-        $this->nascimento = $nascimento;
+    private function setMatricula($matricula) {
+        $this->matricula = $matricula;
     }
 
     private function validateData($data) {

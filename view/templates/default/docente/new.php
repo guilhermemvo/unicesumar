@@ -1,12 +1,12 @@
 <?php
 
     $nome = null;
-    $nascimento = null;
+    $matricula = null;
 
     if (isset($data)) {
         foreach ($data as $key => $object) {
             $nome = $object->nome;
-            $nascimento = $object->nascimento;
+            $matricula = $object->matricula;
         }
     }
 
@@ -26,8 +26,8 @@
         </div>
 
         <div class="form-group">
-            <label for="nascimento">Data de Nascimento</label>
-            <input type="text" class="form-control" id="nascimento" name="nascimento" value="<?=$nascimento?>" placeholder="01/01/1990">
+            <label for="matricula">Código da Matricula</label>
+            <input type="text" class="form-control" id="matricula" name="matricula" value="<?=$matricula?>" placeholder="EByMA3NZ">
         </div>
 
         <div class="row">
@@ -38,22 +38,5 @@
                 <button type="submit" class="btn btn-success">Enviar</button>
             </div>
         </div>
-
     </form>
-
 </div>
-
-<script type="text/javascript">
-    $(function() {
-        $('input[name="nascimento"]').daterangepicker({
-            singleDatePicker: true,
-            showDropdowns: true,
-            startDate: "20/10/1990",
-            locale: {
-                "format": "DD/MM/YYYY",
-                "daysOfWeek": ["Dom","Seg","Ter","Qua","Qui","Sex","Sab"],
-                "monthNames": ["Janeiro","Fevereiro","Maço","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"],
-            },
-        });
-    });
-</script>
