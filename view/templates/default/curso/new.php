@@ -1,12 +1,12 @@
 <?php
 
     $nome = null;
-    $matricula = null;
+    $tipo = null;
 
     if (isset($data)) {
         foreach ($data as $key => $object) {
             $nome = $object->nome;
-            $matricula = $object->matricula;
+            $tipo = $object->tipo;
         }
     }
 
@@ -26,8 +26,17 @@
         </div>
 
         <div class="form-group">
-            <label for="matricula">Código da Matricula</label>
-            <input type="text" class="form-control" id="matricula" name="matricula" value="<?=$matricula?>" placeholder="EByMA3NZ">
+
+            <label for="tipo">Tipo do curso</label>
+            <select id="tipo" name="tipo" class="form-control">
+                <option></option>
+                <option>Tecnólogo</option>
+                <option>Bacharel</option>
+                <option>Especialista</option>
+                <option>Mestre</option>
+                <option>Doutor</option>
+            </select>
+
         </div>
 
         <div class="row">

@@ -2,7 +2,7 @@
 
 class CursoObject {
 
-    private $id, $name, $matricula;
+    private $id, $name, $tipo;
 
     public function __construct($request)
     {
@@ -11,7 +11,7 @@ class CursoObject {
         }
 
         $this->setName($request['nome']);
-        $this->setMatricula($request['matricula']);
+        $this->setTipo($request['tipo']);
     }
 
     public function getId() {
@@ -30,12 +30,12 @@ class CursoObject {
         $this->name = $name;
     }
 
-    public function getMatricula() {
-        return $this->matricula;
+    public function getTipo() {
+        return $this->tipo;
     }
 
-    private function setMatricula($matricula) {
-        $this->matricula = $matricula;
+    private function setTipo($tipo) {
+        $this->tipo = $tipo;
     }
 
     private function validateData($data) {

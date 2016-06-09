@@ -3,10 +3,10 @@
 class CursoModel extends BaseModel
 {
 
-    const CREATE_QUERY = 'INSERT INTO curso (NM_CURSO,CD_MATRICULA) VALUES (:name,:matricula)';
-    const LIST_ALL_QUERY = 'SELECT ID_CURSO as id, NM_CURSO as nome, CD_MATRICULA as matricula FROM CURSO ORDER BY NM_CURSO ASC';
-    const SELECT_QUERY = 'SELECT NM_CURSO as nome, CD_MATRICULA as matricula FROM CURSO WHERE ID_CURSO = :id';
-    const UPDATE_QUERY = 'UPDATE curso SET NM_CURSO=:name,CD_MATRICULA=:matricula WHERE ID_CURSO=:id';
+    const CREATE_QUERY = 'INSERT INTO curso (NM_CURSO,TP_TIPO_CURSO) VALUES (:name,:tipo)';
+    const LIST_ALL_QUERY = 'SELECT ID_CURSO as id, NM_CURSO as nome, TP_TIPO_CURSO as tipo FROM CURSO ORDER BY NM_CURSO ASC';
+    const SELECT_QUERY = 'SELECT NM_CURSO as nome, TP_TIPO_CURSO as tipo FROM CURSO WHERE ID_CURSO = :id';
+    const UPDATE_QUERY = 'UPDATE curso SET NM_CURSO=:name,TP_TIPO_CURSO=:tipo WHERE ID_CURSO=:id';
     const DELETE_QUERY = 'DELETE FROM curso WHERE ID_CURSO=:id';
 
 
@@ -19,7 +19,7 @@ class CursoModel extends BaseModel
     {
         $params = array(
             'name' => $cursoObject->getName(),
-            'matricula' => $cursoObject->getMatricula(),
+            'tipo' => $cursoObject->getTipo(),
         );
 
         try {
@@ -54,13 +54,12 @@ class CursoModel extends BaseModel
         $params = array(
             'id'            => $id,
             'name'          => $cursoObject->getName(),
-            'matricula'    => $cursoObject->getMatricula(),
+            'tipo'          => $cursoObject->getTipo(),
         );
 
         try {
             return $this->call(self::UPDATE_QUERY, $params, false);
         } catch (Exception $exc) {
-            echo '<pre>Exception!</pre>';
             throw new Exception($exc->getMessage());
         }
     }
