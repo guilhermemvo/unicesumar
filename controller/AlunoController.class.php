@@ -14,7 +14,7 @@ class AlunoController {
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
     const VIEW = 'aluno/';
 
-    public function create()
+    public function create() // insert
     {
         if (empty($_POST)) {
             View::output(self::VIEW . 'new');
@@ -41,7 +41,7 @@ class AlunoController {
         }
     }
 
-    public function edit($id)
+    public function edit($id) // select one
     {
         $alunoModel = new AlunoModel();
 
@@ -53,12 +53,12 @@ class AlunoController {
 
         } catch (Exception $exc) {
             //log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
             View::output(self::VIEW . 'list');
         }
     }
 
-    public function read()
+    public function read() // select all
     {
         $alunoModel = new AlunoModel();
 
@@ -76,14 +76,14 @@ class AlunoController {
             View::output(self::VIEW . 'list');
 
         } catch (Exception $exc) {
-            // logar erro $exc->getMessage()));
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
+            // View::setAlert('danger', $exc->getMessage());
             View::output('index');
             exit();
         }
     }
 
-    public function update($id)
+    public function update($id)  // update
     {
 
         $request = $_POST;
@@ -101,12 +101,12 @@ class AlunoController {
             }
         } catch (Exception $exc) {
             // log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
             $this->edit($id);
         }
     }
 
-    public function delete($id)
+    public function delete($id) // delete
     {
         $alunoModel = new AlunoModel();
 

@@ -53,7 +53,7 @@ class DocenteController {
 
         } catch (Exception $exc) {
             //log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
             View::output(self::VIEW . 'list');
         }
     }
@@ -76,8 +76,8 @@ class DocenteController {
             View::output(self::VIEW . 'list');
 
         } catch (Exception $exc) {
-            // logar erro $exc->getMessage()));
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
+            View::setAlert('danger', $exc->getMessage());
             View::output('index');
             exit();
         }
@@ -101,7 +101,7 @@ class DocenteController {
             }
         } catch (Exception $exc) {
             // log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
             $this->edit($id);
         }
     }

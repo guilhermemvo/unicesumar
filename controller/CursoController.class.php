@@ -14,6 +14,7 @@ class CursoController {
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
     const VIEW = 'curso/';
 
+
     public function create()
     {
         if (empty($_POST)) {
@@ -53,7 +54,7 @@ class CursoController {
 
         } catch (Exception $exc) {
             //log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
             View::output(self::VIEW . 'list');
         }
     }
@@ -76,8 +77,8 @@ class CursoController {
             View::output(self::VIEW . 'list');
 
         } catch (Exception $exc) {
-            // logar erro $exc->getMessage()));
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
+            View::setAlert('danger', $exc->getMessage());
             View::output('index');
             exit();
         }
@@ -90,7 +91,7 @@ class CursoController {
         $this->isValidRequest($request);
 
         try {
-            $cursoObject = new CursoObject($_POST);
+            $cursoObject = new CursoObject($request);
             $cursoModel = new CursoModel();
 
             if ($cursoModel->update($id, $cursoObject)) {
@@ -100,8 +101,8 @@ class CursoController {
                 View::setAlert('danger', self::EDIT_CURSO_FAIL);
             }
         } catch (Exception $exc) {
-            // log $exc->getMessage()
-            View::setAlert('danger', self::NO_POSSIBLE);
+            View::setAlert('info', self::NO_POSSIBLE);
+            View::setAlert('danger', $exc->getMessage());
             $this->edit($id);
         }
     }
@@ -123,12 +124,17 @@ class CursoController {
     private function isValidRequest(&$request)
     {
         $nome = filter_input(INPUT_POST, 'nome',FILTER_SANITIZE_STRING);
-        $matricula = filter_input(INPUT_POST, 'matricula',FILTER_SANITIZE_SPECIAL_CHARS);
+        $tipo = filter_input(INPUT_POST, 'tipo',FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (!empty($nome) && !empty($matricula)) {
+        if (!empty($nome) && !empty($tipo)) {
+
+            $nome = htmlentities($nome);
+            sanitizeCaracters($tipo);
+            $tipo = strtolower($tipo);
+
             $request = array(
                 'nome' => $nome,
-                'matricula' => $matricula,
+                'tipo' => $tipo,
             );
         } else {
             View::setParams(array('data' => array((object)$request)));
@@ -137,4 +143,6 @@ class CursoController {
             exit();
         }
     }
+
+
 }
