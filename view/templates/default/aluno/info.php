@@ -33,14 +33,13 @@
                             <td>" . dateToBr($object->nascimento) . "</td>
                             <td>
                                 <div class='btn-group btn-group-sm' role='group'>
-                                    <a class='btn btn-info' href='index.php?class=Aluno&function=info&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>
+                                    <a class='btn btn-info' href='index.php?class=Aluno&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>
                                     <a class='btn btn-warning' href='index.php?class=Aluno&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-pencil'></span></a>
                                     <a class='btn btn-danger btn-sm' data-toggle='modal' data-target='#deleteModal' role='button'><span class='glyphicon glyphicon-trash'></span></a>
                                 </div>
                             </td>
                         </tr>
 
-                        <!-- modal -->
                         <div class='modal fade' id='deleteModal' tabindex='-1' role='dialog' aria-labelledby='deleteModalLabel'>
                             <div class='modal-dialog' role='document'>
                                 <div class='modal-content'>
