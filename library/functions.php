@@ -15,3 +15,8 @@ function dateToBr($date)
     $data = "$dia/$mes/$ano";
     return $data;
 }
+
+function sanitizeCaracters(&$string)
+{
+    $string = preg_replace( '/[`^~\'"]/', null, iconv( 'UTF-8', 'ASCII//TRANSLIT', $string ) );
+}
