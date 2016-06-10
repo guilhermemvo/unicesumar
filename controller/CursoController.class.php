@@ -10,7 +10,7 @@ class CursoController {
     const EDIT_CURSO_FAIL = 'O curso não pode ser alterado. Tente novamente mais tarde.';
     const INVALID_DATA = 'Dados inválidos, preencha corretamento o formulário.';
     const EMPTY_DATA = 'Preencha todos os campos do formulário.';
-    const EMPTY_LIST = 'Não há nenhum curso, insira um novo.';
+    const EMPTY_LIST = 'Não há nenhum curso cadastrado, insira um novo.';
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
     const VIEW = 'curso/';
 
@@ -36,8 +36,8 @@ class CursoController {
                 View::setParams(array('danger' => self::CREATE_CURSOS_FAIL));
             }
         } catch (Exception $exc) {
-            // log $exc->getMessage();
-            View::setAlert('danger', self::CREATE_CURSOS_FAIL);
+            View::setAlert('info', self::CREATE_CURSOS_FAIL);
+            View::setAlert('danger', $exc->getMessage());
             View::output(self::VIEW . 'new');
         }
     }

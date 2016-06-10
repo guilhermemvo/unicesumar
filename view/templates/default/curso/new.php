@@ -30,11 +30,11 @@
             <label for="tipo">Tipo do curso</label>
             <select id="tipo" name="tipo" class="form-control">
                 <option></option>
-                <option>Tecnólogo</option>
-                <option>Bacharel</option>
-                <option>Especialista</option>
-                <option>Mestre</option>
-                <option>Doutor</option>
+                <option>Técnico</option>
+                <option>Bacharelado</option>
+                <option>Especialização</option>
+                <option>Mestrado</option>
+                <option>Doutorado</option>
             </select>
 
         </div>
