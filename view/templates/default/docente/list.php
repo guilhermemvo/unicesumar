@@ -15,7 +15,7 @@
             <tr>
                 <th class="col-md-1">ID</th>
                 <th class="col-md-6">NOME</th>
-                <th class="col-md-3">MATRICULA</th>
+                <th class="col-md-3">TITULAÇÃO</th>
                 <th class="col-md-2">OPÇÕES</th>
             </tr>
         </thead>
@@ -30,7 +30,7 @@
                         <tr>
                             <td> $object->id </td>
                             <td> $object->nome </td>
-                            <td> $object->matricula </td>
+                            <td> $object->titulacao </td>
                             <td>
                                 <div class='btn-group btn-group-sm' role='group'>
                                     <a class='btn btn-info' href='index.php?class=Docente&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>

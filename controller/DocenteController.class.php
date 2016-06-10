@@ -10,7 +10,7 @@ class DocenteController {
     const EDIT_DOCENTE_FAIL = 'O docente não pode ser alterado. Tente novamente mais tarde.';
     const INVALID_DATA = 'Dados inválidos, preencha corretamento o formulário.';
     const EMPTY_DATA = 'Preencha todos os campos do formulário.';
-    const EMPTY_LIST = 'Não há nenhum docente, insira um novo.';
+    const EMPTY_LIST = 'Não há nenhum docente cadastrado, insira um novo.';
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
     const VIEW = 'docente/';
 
@@ -123,12 +123,17 @@ class DocenteController {
     private function isValidRequest(&$request)
     {
         $nome = filter_input(INPUT_POST, 'nome',FILTER_SANITIZE_STRING);
-        $matricula = filter_input(INPUT_POST, 'matricula',FILTER_SANITIZE_SPECIAL_CHARS);
+        $titulacao = filter_input(INPUT_POST, 'titulacao',FILTER_SANITIZE_SPECIAL_CHARS);
 
-        if (!empty($nome) && !empty($matricula)) {
+        if (!empty($nome) && !empty($titulacao)) {
+
+            $nome = htmlentities($nome);
+            sanitizeCaracters($titulacao);
+            $titulacao = strtolower($titulacao);
+
             $request = array(
                 'nome' => $nome,
-                'matricula' => $matricula,
+                'titulacao' => $titulacao,
             );
         } else {
             View::setParams(array('data' => array((object)$request)));
