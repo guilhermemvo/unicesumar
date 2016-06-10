@@ -18,7 +18,7 @@
 
 <div class="row">
 
-    <form role="form" action="index.php?class=Docente&function=create" method="POST" autocomplete="on">
+    <form role="form" action="index.php?class=Docente&function=create" method="POST">
 
         <div class="form-group">
             <label for="nome">Nome</label>

@@ -11,7 +11,7 @@ class AlunoObject {
         }
 
         $this->setName($request['nome']);
-        $this->setNascimento(dateToEn($request['nascimento']));
+        $this->setNascimento($request['nascimento']);
     }
 
     public function getId() {

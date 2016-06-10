@@ -18,7 +18,7 @@
 
 <div class="row">
 
-    <form role="form" action="index.php?class=Curso&function=update&id=<?=$_GET['id']?>" method="POST" autocomplete="on">
+    <form role="form" action="index.php?class=Curso&function=update&id=<?=$_GET['id']?>" method="POST">
 
         <div class="form-group">
             <label for="nome">Nome</label>
