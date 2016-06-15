@@ -1,6 +1,6 @@
 <?php
 
-class ConectionDB
+class ConnectionDB
 {
 
     private $pdo;
