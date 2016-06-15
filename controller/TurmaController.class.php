@@ -1,56 +1,50 @@
 <?php
 
-class AlunoController {
+class TurmaController {
 
-    const CREATE_ALUNOS_SUCCESS = 'Aluno inserido com sucesso.';
-    const CREATE_ALUNOS_FAIL = 'O aluno não pode ser cadastrado. Tente novamente mais tarde.';
-    const DELETE_ALUNO_SUCCESS = 'Aluno deletado com sucesso.';
-    const DELETE_ALUNO_FAIL = 'O aluno não pode ser deletado. Tente novamente mais tarde.';
-    const EDIT_ALUNO_SUCCESS = 'Aluno alterado com sucesso.';
-    const EDIT_ALUNO_FAIL = 'O aluno não pode ser alterado. Tente novamente mais tarde.';
+    const CREATE_TURMA_SUCCESS = 'Turma inserida com sucesso.';
+    const CREATE_TURMA_FAIL = 'A turma não pode ser cadastrada. Tente novamente mais tarde.';
+    const DELETE_TURMA_SUCCESS = 'Turma deletada com sucesso.';
+    const DELETE_TURMA_FAIL = 'A turma não pode ser deletada. Tente novamente mais tarde.';
+    const EDIT_TURMA_SUCCESS = 'Turma alterada com sucesso.';
+    const EDIT_TURMA_FAIL = 'A turma não pode ser alterada. Tente novamente mais tarde.';
     const INVALID_DATA = 'Dados inválidos, preencha corretamento o formulário.';
     const EMPTY_DATA = 'Preencha todos os campos do formulário.';
-    const EMPTY_LIST = 'Não há nenhum aluno cadastrado, insira um novo.';
+    const EMPTY_LIST = 'Não há nenhuma turma cadastrada, insira uma nova.';
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
-    const REGISTRATION_ALUNOS_SUCCESS = 'Aluno matriculado com sucesso.';
-    const REGISTRATION_ALUNOS_FAIL = 'O aluno não pode ser matriculado. Tente novamente mais tarde.';
-    const VIEW = 'aluno/';
+    const REGISTRATION_TURMA_SUCCESS = 'Turma matriculada com sucesso.';
+    const VIEW = 'turma/';
 
     public function create() // insert
     {
-        if(empty($_POST)){
-        View::output(self::VIEW . 'new');
-        exit();
-        }
-
         $request = $_POST;
-        $this->isValidRequest($request);
 
         try {
-            $alunoObject = new AlunoObject($request);
-            $alunoModel = new AlunoModel();
+            $turmaObject = new TurmaObject($request);
+            $turmaModel = new TurmaModel();
 
-            if ($alunoModel->create($alunoObject)) {
-                View::setAlert('success', self::CREATE_ALUNOS_SUCCESS);
-                $this->read();
+            if ($turmaModel->create($turmaObject)) {
+                View::setAlert('success', self::CREATE_TURMA_SUCCESS);
+                $CursoController = new CursoController();
+                $CursoController->info($request['cursoID']);
             } else {
-                View::setParams(array('danger' => self::CREATE_ALUNOS_FAIL));
+                View::setParams(array('danger' => self::CREATE_TURMA_FAIL));
             }
         } catch (Exception $exc) {
-            // log $exc->getMessage();
-            View::setAlert('danger', self::CREATE_ALUNOS_FAIL);
+            View::setAlert('info', self::CREATE_TURMA_FAIL);
+            View::setAlert('danger', $exc->getMessage());
             View::output(self::VIEW . 'new');
         }
     }
 
     public function edit($id) // select one
     {
-        $alunoModel = new AlunoModel();
+        $turmaModel = new TurmaModel();
 
         try {
 
-            $aluno = $alunoModel->edit($id);
-            View::setParams(array('data' => $aluno));
+            $turma = $turmaModel->edit($id);
+            View::setParams(array('data' => $turma));
             View::output(self::VIEW . 'edit');
 
         } catch (Exception $exc) {
@@ -62,11 +56,11 @@ class AlunoController {
 
     public function read() // select all
     {
-        $alunoModel = new AlunoModel();
+        $turmaModel = new TurmaModel();
 
         try {
 
-            $objectList = $alunoModel->select();
+            $objectList = $turmaModel->select();
 
             if (empty($objectList)) {
                 View::setAlert('info', self::EMPTY_LIST);
@@ -92,14 +86,14 @@ class AlunoController {
         $this->isValidRequest($request);
 
         try {
-            $alunoObject = new AlunoObject($_POST);
-            $alunoModel = new AlunoModel();
+            $turmaObject = new TurmaObject($_POST);
+            $turmaModel = new TurmaModel();
 
-            if ($alunoModel->update($id, $alunoObject)) {
-                View::setAlert('success', self::EDIT_ALUNO_SUCCESS);
+            if ($turmaModel->update($id, $turmaObject)) {
+                View::setAlert('success', self::EDIT_TURMA_SUCCESS);
                 $this->read();
             } else {
-                View::setAlert('danger', self::EDIT_ALUNO_FAIL);
+                View::setAlert('danger', self::EDIT_TURMA_FAIL);
             }
         } catch (Exception $exc) {
             // log $exc->getMessage()
@@ -108,20 +102,20 @@ class AlunoController {
         }
     }
 
-    public function info($alunoID)
+    public function info($turmaID)
     {
-        $alunoModel = new AlunoModel();
+        $turmaModel = new TurmaModel();
         $cursoModel = new cursoModel();
 
         try {
 
-            $aluno = $alunoModel->edit($alunoID);
-            $info = $alunoModel->getMatriculas($alunoID);
+            $turma = $turmaModel->edit($turmaID);
+            $info = $turmaModel->getMatriculas($turmaID);
             $cursos = $cursoModel->select();
 
             View::setParams(
                 array(
-                    'data' => $aluno,
+                    'data' => $turma,
                     'infos' => $info,
                     'cursos' => $cursos
                 )
@@ -136,14 +130,16 @@ class AlunoController {
 
     public function delete($id) // delete
     {
-        $alunoModel = new AlunoModel();
+        $turmaModel = new TurmaModel();
 
         try {
-            $alunoModel->delete($id);
-            View::setAlert('success', self::DELETE_ALUNO_SUCCESS);
-            $this->read();
+            $turmaModel->delete($id);
+            View::setAlert('success', self::DELETE_TURMA_SUCCESS);
+            $CursoController = new CursoController();
+            $CursoController->read();
         } catch (Exception $exc) {
-            View::setAlert('danger', self::DELETE_ALUNO_FAIL);
+            View::setAlert('info', self::DELETE_TURMA_FAIL);
+            View::setAlert('danger', $exc->getMessage());
             $this->read();
         }
     }
@@ -168,24 +164,23 @@ class AlunoController {
 
     public function matricula()
     {
-
         $request = $_POST;
-        $alunoID = $request['alunoID'];
         $turmaID = $request['turmaID'];
+        $cursoID = $request['cursoID'];
 
         try {
-            $alunoModel = new AlunoModel();
-            if ($alunoModel->matricula($alunoID, $turmaID)) {
-                View::setAlert('success', self::REGISTRATION_ALUNOS_SUCCESS);
-                $this->info($alunoID);
+            $turmaModel = new TurmaModel();
+            if ($turmaModel->matricula($turmaID, $cursoID)) {
+                View::setAlert('success', self::REGISTRATION_TURMA_SUCCESS);
+                $this->info($turmaID);
             } else {
-                View::setAlert('danger', self::REGISTRATION_ALUNOS_FAIL);
-                $this->info($alunoID);
+                echo '<pre>' . 'teste' . '<br></pre>'; exit('Fim');
+                View::setParams(array('danger' => self::CREATE_TURMA_FAIL));
             }
         } catch (Exception $exc) {
-            View::setAlert('info', self::REGISTRATION_ALUNOS_FAIL);
+            View::setAlert('info', self::CREATE_TURMA_FAIL);
             View::setAlert('danger', $exc->getMessage());
-            $this->info($alunoID);
+            View::output(self::VIEW . 'new');
         }
     }
 }

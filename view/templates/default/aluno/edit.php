@@ -14,7 +14,8 @@
 
 <div class="row"><p>Editar Aluno</p></div>
 <div class="row">
-    <form role="form" action="index.php?class=Aluno&function=create" method="POST">
+    <form role="form" action="index.php?class=Aluno&function=update&id=<?=$_GET['id']?>" method="POST">
+
         <div class="form-group"><input autofocus class="form-control" id="nome" maxlength="100" name="nome" placeholder="Nome do aluno"  required type="text" value="<?=$nome?>"></div>
         <div class="form-group"><input class="form-control" id="nascimento" name="nascimento" placeholder="01/01/1990" required type="date" value="<?=$nascimento?>"></div>
         <div class="form-group text-right">
