@@ -14,6 +14,7 @@ class CursoController {
     const NO_POSSIBLE = 'Não foi possível realizar essa operação, tente novamente mais tarde.';
     const VIEW = 'curso/';
 
+    const CREATE_TURMA_SUCCESS = 'Truma inserida com sucesso.';
 
     public function create()
     {
@@ -144,5 +145,49 @@ class CursoController {
         }
     }
 
+    public function info($cursoID)
+    {
 
+        $cursoModel = new cursoModel();
+        $turmaModel = new turmaModel();
+
+        try {
+
+            $curso = $cursoModel->edit($cursoID);
+            $infos = $turmaModel->edit($cursoID);
+
+            View::setParams(
+                array(
+                    'data' => $curso,
+                    'infos' => $infos
+                )
+            );
+            View::output(self::VIEW . 'info');
+        } catch (Exception $exc) {
+            View::setAlert('info', self::NO_POSSIBLE);
+            View::setAlert('danger', $exc->getMessage());
+            View::output(self::VIEW . 'list');
+        }
+    }
+
+    public function createTurma()
+    {
+        $request = $_POST;
+
+        try {
+            $turmaObject = new turmaObject($request);
+            $turmaModel = new turmaModel();
+
+            if ($turmaModel->create($turmaObject)) {
+                View::setAlert('success', self::CREATE_TURMA_SUCCESS);
+                $this->info();
+            } else {
+                View::setParams(array('danger' => self::CREATE_CURSOS_FAIL));
+            }
+        } catch (Exception $exc) {
+            View::setAlert('info', self::CREATE_CURSOS_FAIL);
+            View::setAlert('danger', $exc->getMessage());
+            View::output(self::VIEW . 'new');
+        }
+    }
 }

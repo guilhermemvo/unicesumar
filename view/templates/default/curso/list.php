@@ -33,7 +33,7 @@
                             <td> $object->tipo </td>
                             <td>
                                 <div class='btn-group btn-group-sm' role='group'>
-                                    <a class='btn btn-info' href='index.php?class=Curso&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>
+                                    <a class='btn btn-info' href='index.php?class=Curso&function=info&id=$object->id' role='button'><span class='glyphicon glyphicon-eye-open'></span></a>
                                     <a class='btn btn-warning' href='index.php?class=Curso&function=edit&id=$object->id' role='button'><span class='glyphicon glyphicon-pencil'></span></a>
                                     <a class='btn btn-danger btn-sm' data-toggle='modal' data-target='#deleteModal' role='button'><span class='glyphicon glyphicon-trash'></span></a>
                                 </div>

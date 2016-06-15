@@ -1,6 +1,6 @@
 <?php
 
-class BaseModel extends ConectionDB
+class BaseModel extends ConnectionDB
 {
 
     public function __construct()

@@ -1,13 +1,12 @@
 <?php
-
-class CursoModel extends BaseModel
+class TurmaModel extends BaseModel
 {
 
-    const CREATE_QUERY = 'INSERT INTO curso (NM_CURSO,TP_TIPO_CURSO) VALUES (:name,:tipo)';
-    const LIST_ALL_QUERY = 'SELECT ID_CURSO as id, NM_CURSO as nome, TP_TIPO_CURSO as tipo FROM CURSO ORDER BY NM_CURSO ASC';
-    const SELECT_QUERY = 'SELECT ID_CURSO as id, NM_CURSO as nome, TP_TIPO_CURSO as tipo FROM CURSO WHERE ID_CURSO = :id';
-    const UPDATE_QUERY = 'UPDATE curso SET NM_CURSO=:name,TP_TIPO_CURSO=:tipo WHERE ID_CURSO=:id';
-    const DELETE_QUERY = 'DELETE FROM curso WHERE ID_CURSO=:id';
+    const CREATE_QUERY = 'INSERT INTO turma (NM_TURMA,NR_ANO,NR_SEMESTRE,CURSO_ID) VALUES (:name,:ano,:semestre,:curso)';
+    const LIST_ALL_QUERY = 'SELECT ID_TURMA as id, NM_TURMA as nome, TP_TIPO_TURMA as tipo FROM TURMA ORDER BY NM_TURMA ASC';
+    const SELECT_QUERY = 'SELECT ID_TURMA as id, NM_TURMA as nome, NR_ANO as ano, NR_SEMESTRE as semestres FROM TURMA WHERE CURSO_ID = :id';
+    const UPDATE_QUERY = 'UPDATE turma SET NM_TURMA=:name,TP_TIPO_TURMA=:tipo WHERE ID_TURMA=:id';
+    const DELETE_QUERY = 'DELETE FROM turma_aluno WHERE ID_TURMA=:id';
 
 
     public function __construct()
@@ -15,11 +14,13 @@ class CursoModel extends BaseModel
         parent::__construct();
     }
 
-    public function create(CursoObject $cursoObject)
+    public function create(TurmaObject $turmaObject)
     {
         $params = array(
-            'name' => $cursoObject->getName(),
-            'tipo' => $cursoObject->getTipo(),
+            'name' => $turmaObject->getName(),
+            'ano' => $turmaObject->getAno(),
+            'semestre' => $turmaObject->getSemestres(),
+            'curso' => $turmaObject->getSemestres(),
         );
 
         try {
@@ -49,12 +50,12 @@ class CursoModel extends BaseModel
         }
     }
 
-    public function update($id, CursoObject $cursoObject)
+    public function update($id, TurmaObject $turmaObject)
     {
         $params = array(
             'id'            => $id,
-            'name'          => $cursoObject->getName(),
-            'tipo'          => $cursoObject->getTipo(),
+            'name'          => $turmaObject->getName(),
+            'tipo'          => $turmaObject->getTipo(),
         );
 
         try {
@@ -77,5 +78,3 @@ class CursoModel extends BaseModel
         }
     }
 }
-
-?>
